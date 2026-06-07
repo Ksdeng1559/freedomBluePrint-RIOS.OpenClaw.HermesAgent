@@ -12,6 +12,7 @@ RIOS = Intelligence + memory
 Hermes Agent = Orchestration + mission control
 OpenClaw = Delegated worker execution
 Claude Code / Codex = Build execution
+Whisper / WhisperX = Speech intelligence and transcription capture
 Slack = Human governance + approvals
 GitHub = Code, PRs, issues, and evidence trail
 Supabase / Markdown Vault / Qdrant = Structured truth + human-readable operating knowledge + semantic recall
@@ -34,6 +35,7 @@ It supports:
 - Founding partner SaaS builds
 - Venture studio opportunity evaluation
 - Capital formation and investor intelligence workflows
+- Meeting intelligence, voice note capture, and speech-to-action workflows
 
 ## Operating Doctrine
 
@@ -126,6 +128,8 @@ The MVP should focus on one repeatable revenue workflow:
 
 The first recommended use case is Urban Mining Feedstock Intelligence because it combines signal detection, relationship intelligence, supplier discovery, capital formation, investor targeting, and repeatable research-to-action workflows.
 
+Speech intelligence should be added as an early MVP capture model. The first version should support recorded audio and video uploads, not real-time voice agents. Whisper or WhisperX converts the recording into a transcript, Hermes extracts entities and signals, and RIOS stores the resulting opportunity intelligence in Supabase, Markdown, and Qdrant.
+
 ## Core RIOS Methodology
 
 The reusable graph-aware context intelligence methodology is documented here:
@@ -151,6 +155,7 @@ Hermes = Who should do it?
 OpenClaw = Which worker executes the task?
 GitHub = What evidence was produced?
 Qdrant = What prior knowledge is semantically similar?
+Whisper / WhisperX = What was said in meetings, calls, field notes, and recordings?
 ```
 
 Urban Mining Feedstock Intelligence is Example Use Case 1, with its detailed implementation maintained in:
@@ -158,6 +163,83 @@ Urban Mining Feedstock Intelligence is Example Use Case 1, with its detailed imp
 ```text
 Ksdeng1559/breakthrough-urban-mining-feedstock-raise
 ```
+
+## Speech Intelligence Module
+
+The Speech Intelligence Module converts recorded conversations into structured business intelligence.
+
+### MVP Model
+
+Use Whisper or WhisperX first for recorded audio and video uploads.
+
+```text
+Audio / Video Upload
+   ↓
+Whisper / WhisperX
+   ↓
+Transcript
+   ↓
+Hermes Agent
+   ↓
+Entity + Signal Extraction
+   ↓
+Supabase / Markdown Vault / Qdrant
+   ↓
+Tasks, Reports, CRM Updates, Opportunity Records
+```
+
+The MVP should focus on asynchronous capture:
+
+- Meeting recordings
+- Voice notes
+- Investor calls
+- Field visit recordings
+- Site walkthrough videos
+- Client discovery calls
+- Trading narration and training commentary
+
+### Production Extension
+
+Real-time voice should be added later after the intelligence layer is proven.
+
+Recommended future real-time stack:
+
+```text
+LiveKit = Real-time audio/video room layer
+Deepgram or streaming STT = Real-time speech-to-text
+Hermes Agent = Orchestration and business logic
+GPT / Claude = Reasoning layer
+ElevenLabs or OpenAI TTS = Voice output
+Supabase = Structured records and permissions
+Qdrant = Memory recall
+```
+
+### Strategic Doctrine
+
+RIOS should not start as a generic voice assistant.
+
+The value chain is:
+
+```text
+Conversation
+   ↓
+Intelligence
+   ↓
+Memory
+   ↓
+Action
+```
+
+Voice is one capture mechanism. The strategic value is converting conversations into institutional memory, relationship intelligence, opportunity records, and approved next actions.
+
+### Example Workers
+
+- Voice Intelligence Worker
+- Meeting Intelligence Worker
+- Investor Call Intelligence Worker
+- Urban Mining Feedstock Capture Worker
+- Field Documentation Worker
+- GMBOS Trading Narration Worker
 
 ## Key Architecture Decisions
 
@@ -176,6 +258,14 @@ OpenClaw is not the central brain. OpenClaw is a delegated worker for field exec
 ### RIOS as Intelligence OS
 
 RIOS stores business context, goals, opportunities, client state, PRDs, signal scoring rules, decisions, feature requests, and long-term system knowledge.
+
+### Whisper / WhisperX as Speech Intelligence Layer
+
+Whisper or WhisperX converts recorded audio and video into transcripts that Hermes can process into structured intelligence.
+
+Whisper should be used first as the MVP transcription model because it supports local/offline transcription and avoids early real-time voice complexity. WhisperX may be used when timestamps, faster processing, and speaker-aware workflows are required.
+
+This layer does not replace LiveKit, ElevenLabs, or real-time voice infrastructure. It provides the first practical capture path for turning meetings, calls, field notes, investor conversations, and training narration into RIOS memory and action records.
 
 ### Qdrant as Semantic Memory Layer
 
@@ -289,6 +379,10 @@ The next layer of the system will add:
 - Meeting Intelligence Workflow
 - Qdrant Semantic Memory Service
 - MemoryService abstraction
+- Speech Intelligence Module
+- Voice Intelligence Worker
+- Whisper / WhisperX transcription pipeline
+- Future LiveKit real-time voice layer
 
 These planned modules are tracked in:
 
