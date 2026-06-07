@@ -80,10 +80,11 @@ The system follows this loop:
 
 ## Execution Layer Documents
 
-Start with these new execution documents:
+Start with these execution documents:
 
 ```text
 00-START-HERE/QUICKSTART-7-DAY-ACTION-PLAN.md
+00-START-HERE/MISSION-LIFECYCLE-SOP.md
 02-RIOS-OPERATING-SYSTEM/RIOS-SYSTEM-BOUNDARIES.md
 09-HERMES-OPENCLAW/WORKER-ASSIGNMENT-MATRIX.md
 11-IMPLEMENTATION-ROADMAP/MVP-BUILD-SEQUENCE.md
@@ -91,6 +92,20 @@ Start with these new execution documents:
 ```
 
 These files convert the architecture from concept into a repeatable operating workflow.
+
+## Mission Lifecycle
+
+The canonical mission lifecycle is documented here:
+
+```text
+00-START-HERE/MISSION-LIFECYCLE-SOP.md
+```
+
+Every workflow should follow this sequence unless there is a documented reason to deviate:
+
+```text
+Signal → Goal → Mission Brief → Worker Assignment → Research Packet → PRD → Build → QA → Approval → Delivery → Pattern Capture
+```
 
 ## MVP Implementation Priority
 
@@ -235,19 +250,20 @@ Hermes must require human approval before:
 Start here:
 
 1. Read `00-START-HERE/QUICKSTART-7-DAY-ACTION-PLAN.md`
-2. Read `00-START-HERE/OPERATING-MANUAL.md`
-3. Read `02-RIOS-OPERATING-SYSTEM/RIOS-SYSTEM-BOUNDARIES.md`
-4. Read `09-HERMES-OPENCLAW/HERMES-RIOS-OPENCLAW-INTEGRATION.md`
-5. Read `09-HERMES-OPENCLAW/WORKER-ASSIGNMENT-MATRIX.md`
-6. Read `02-RIOS-OPERATING-SYSTEM/GRAPH-KNOWLEDGE-CONTEXT-METHODOLOGY.md`
-7. Read `02-RIOS-OPERATING-SYSTEM/QDRANT-SEMANTIC-MEMORY-LAYER.md`
-8. Read `10-SLACK-COMMAND-CENTER/README.md`
-9. Choose one offer from `05-OFFER-LIBRARY/OFFER-MENU.md`
-10. Use `12-TEMPLATES/MISSION-BRIEF-TEMPLATE.md` to create a mission brief
-11. Use `03-PRD-FACTORY/PRD-INTERVIEW-PROMPT.md` to create a PRD
-12. Execute using `04-BUILD-LAB/CLAUDE-CODE-BUILD-LOOP.md`
-13. Sell using `06-OUTREACH-ENGINE/FIRST-25-OUTREACH-SOP.md`
-14. Track change requests and sign-offs through `10-SLACK-COMMAND-CENTER/`
+2. Read `00-START-HERE/MISSION-LIFECYCLE-SOP.md`
+3. Read `00-START-HERE/OPERATING-MANUAL.md`
+4. Read `02-RIOS-OPERATING-SYSTEM/RIOS-SYSTEM-BOUNDARIES.md`
+5. Read `09-HERMES-OPENCLAW/HERMES-RIOS-OPENCLAW-INTEGRATION.md`
+6. Read `09-HERMES-OPENCLAW/WORKER-ASSIGNMENT-MATRIX.md`
+7. Read `02-RIOS-OPERATING-SYSTEM/GRAPH-KNOWLEDGE-CONTEXT-METHODOLOGY.md`
+8. Read `02-RIOS-OPERATING-SYSTEM/QDRANT-SEMANTIC-MEMORY-LAYER.md`
+9. Read `10-SLACK-COMMAND-CENTER/README.md`
+10. Choose one offer from `05-OFFER-LIBRARY/OFFER-MENU.md`
+11. Use `12-TEMPLATES/MISSION-BRIEF-TEMPLATE.md` to create a mission brief
+12. Use `03-PRD-FACTORY/PRD-INTERVIEW-PROMPT.md` to create a PRD
+13. Execute using `04-BUILD-LAB/CLAUDE-CODE-BUILD-LOOP.md`
+14. Sell using `06-OUTREACH-ENGINE/FIRST-25-OUTREACH-SOP.md`
+15. Track change requests and sign-offs through `10-SLACK-COMMAND-CENTER/`
 
 ## Strategic Positioning
 
