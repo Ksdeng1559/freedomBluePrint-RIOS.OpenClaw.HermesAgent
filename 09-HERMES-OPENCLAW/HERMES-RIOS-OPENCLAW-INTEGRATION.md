@@ -2,9 +2,9 @@
 
 ## Purpose
 
-This document defines how Hermes Agent, OpenClaw, and RIOS work together inside the Freedom Blueprint operating system.
+This document defines how ChatGPT, Hermes Agent, OpenClaw, and RIOS work together inside the Freedom Blueprint operating system.
 
-The goal is not to make OpenClaw the whole system. OpenClaw is one execution layer. Hermes is the orchestration and mission-control layer. RIOS is the business intelligence and operating system layer.
+The goal is not to make OpenClaw the whole system. OpenClaw is one execution layer. Hermes is the orchestration and mission-control layer. RIOS is the business intelligence and operating system layer. ChatGPT is the strategic planning and executive reasoning layer.
 
 Hermes Agent may also perform research, drafting, enrichment, and analysis directly. Research execution should be interchangeable between Hermes and OpenClaw depending on task type, tool access, cost, speed, and reliability.
 
@@ -12,6 +12,7 @@ Hermes Agent may also perform research, drafting, enrichment, and analysis direc
 
 | Layer | Role | Simple Meaning |
 |---|---|---|
+| ChatGPT | Strategic Planning Agent | Defines strategy, business model, offer architecture, prioritization, positioning, investor logic, and executive decisions |
 | RIOS | Intelligence OS | Decides what matters, stores context, manages business logic |
 | Hermes Agent | Orchestrator + Mission Control | Routes tasks, performs research when appropriate, coordinates agents, enforces workflows, manages approvals |
 | OpenClaw | Field Execution Agent | Performs delegated research, outreach prep, scraping, file work, reminders, and operational tasks |
@@ -20,25 +21,62 @@ Hermes Agent may also perform research, drafting, enrichment, and analysis direc
 
 ## Integration Doctrine
 
+ChatGPT is the strategic planning agent.
+
 Hermes is the orchestrator.
 
 OpenClaw is an execution worker, not the only research layer.
 
-RIOS defines the operating model.
+RIOS defines the operating model and stores intelligence.
 
-Hermes coordinates, delegates, executes when useful, and records mission state.
+ChatGPT helps determine what should be built, why it matters, how it should be positioned, and what the strategic plan should be.
+
+Hermes converts the strategy into missions, assigns workers, enforces approval gates, and tracks mission state.
 
 OpenClaw performs delegated field tasks.
 
-Claude Code builds the products.
+Claude Code and Codex build the products.
 
 The complete loop is:
 
-Signal -> RIOS evaluates -> Hermes creates mission -> Hermes decides whether to research directly or delegate to OpenClaw -> Research outputs return to RIOS -> Hermes routes build or outreach tasks -> Claude Code / Codex builds -> RIOS records -> Hermes follows up
+Signal -> RIOS captures context -> ChatGPT creates strategy and prioritization -> Hermes creates mission -> Hermes decides whether to research directly or delegate to OpenClaw -> Research outputs return to RIOS -> ChatGPT reviews strategic implications when needed -> Hermes routes build or outreach tasks -> Claude Code / Codex builds -> RIOS records -> Hermes follows up
+
+## Strategic Planning Rule
+
+Use ChatGPT when the task requires executive judgment, strategic synthesis, business model design, offer positioning, investment logic, or prioritization.
+
+### ChatGPT should lead when:
+
+- The task defines the business strategy
+- The task shapes the offer architecture
+- The task requires market positioning or category design
+- The task involves pricing, monetization, or packaging
+- The task involves investor, capital, or partnership logic
+- The task requires comparing multiple strategic options
+- The task requires a McKinsey-style memo, operating plan, PRD strategy, or business case
+- The task decides whether something becomes a service, SaaS product, or venture studio opportunity
+- The task requires turning raw research into a high-level execution plan
+
+### Hermes should lead when:
+
+- The strategy has been decided and must be converted into missions
+- Work must be routed to the correct agent or worker
+- Multiple agents need coordination
+- Mission state, approvals, retries, and notifications must be managed
+- A recurring workflow or scheduled process must run
+- A handoff must be tracked from research to PRD to build to delivery
+
+### OpenClaw should lead when:
+
+- The task is field-level research, scraping, monitoring, file work, or operational execution
+- The task can be delegated without strategic judgment
+- The output is structured research, markdown notes, lead lists, outreach prep, or updates to a vault
 
 ## Research Interchangeability Rule
 
 Research tasks can be performed by either Hermes Agent or OpenClaw.
+
+ChatGPT may also perform strategic research synthesis after Hermes or OpenClaw produce findings.
 
 ### Hermes should research directly when:
 
@@ -70,6 +108,21 @@ Research tasks can be performed by either Hermes Agent or OpenClaw.
 Regardless of who performs the research, all research outputs must be stored in the same workspace format and returned to Hermes for mission-state tracking.
 
 ## What Each Layer Owns
+
+### ChatGPT Owns
+
+- Strategic planning
+- Business model design
+- Offer positioning
+- Executive synthesis
+- PRD strategy before technical build
+- Venture studio prioritization
+- Market narrative
+- Pricing strategy
+- Investor and partnership logic
+- Client-facing strategic recommendations
+- High-level operating plans
+- Decision memos
 
 ### RIOS Owns
 
@@ -130,6 +183,9 @@ Regardless of who performs the research, all research outputs must be stored in 
 User / Operator
    |
    v
+ChatGPT Strategic Planning Agent
+   |
+   v
 RIOS Dashboard / Workspace
    |
    v
@@ -153,8 +209,12 @@ Hermes chooses the worker before starting each mission task.
 ```text
 New Task
   |
-  |-- Does the task decide strategy, priority, pricing, proposal, or build scope?
-  |      |-- Yes -> Hermes Research Mode
+  |-- Does the task decide strategy, business model, positioning, pricing, or venture priority?
+  |      |-- Yes -> ChatGPT Strategic Planning Agent
+  |      |-- No -> Continue
+  |
+  |-- Does the task decide mission routing, workflow state, or approval handling?
+  |      |-- Yes -> Hermes
   |      |-- No -> Continue
   |
   |-- Is the task repetitive, data-gathering, or field-level research?
@@ -186,9 +246,27 @@ RIOS records:
 - Fit score
 - Recommended offer
 
-### Step 2: Hermes creates a mission
+### Step 2: ChatGPT creates strategic plan
 
-Hermes converts the signal into a mission.
+ChatGPT reviews the RIOS context and creates:
+
+- Strategic opportunity brief
+- Recommended offer
+- Ideal outcome
+- Positioning angle
+- Pricing logic
+- Build-vs-service-vs-SaaS recommendation
+- Risk and approval notes
+
+Output:
+
+```text
+/workspaces/client-name/00-context/chatgpt-strategy-brief.md
+```
+
+### Step 3: Hermes creates a mission
+
+Hermes converts the approved strategy into a mission.
 
 Example mission:
 
@@ -199,31 +277,35 @@ Example mission:
   "objective": "Build AI lead capture and qualification system",
   "priority": "high",
   "approval_required": true,
+  "strategic_planner": "chatgpt",
   "orchestrator": "hermes",
   "research_mode": "interchangeable",
-  "assigned_workers": ["hermes_research", "openclaw_research", "prd_factory", "claude_code_builder"]
+  "assigned_workers": ["chatgpt_strategy", "hermes_research", "openclaw_research", "prd_factory", "claude_code_builder"]
 }
 ```
 
-### Step 3: Hermes selects the research path
+### Step 4: Hermes selects the research path
 
 Hermes decides whether to perform the research directly, delegate to OpenClaw, or run both in parallel.
 
 Recommended default:
 
+- ChatGPT creates strategic framing and decision logic
 - Hermes researches strategic context, business model, offer angle, and mission priority
 - OpenClaw researches website notes, competitors, market examples, local signals, and operational details
-- Hermes merges both into one research synthesis
+- Hermes merges research outputs into one synthesis
+- ChatGPT reviews the synthesis if it changes strategy, positioning, or pricing
 
 Outputs go into:
 
 ```text
+/workspaces/client-name/01-research/chatgpt-strategy-brief.md
 /workspaces/client-name/01-research/hermes-strategy-brief.md
 /workspaces/client-name/01-research/openclaw-findings.md
 /workspaces/client-name/01-research/research-synthesis.md
 ```
 
-### Step 4: RIOS PRD Factory creates build spec
+### Step 5: RIOS PRD Factory creates build spec
 
 RIOS converts the research synthesis into:
 
@@ -234,7 +316,7 @@ RIOS converts the research synthesis into:
 - deployment checklist
 - acceptance criteria
 
-### Step 5: Hermes routes build to Claude Code / Codex
+### Step 6: Hermes routes build to Claude Code / Codex
 
 Hermes sends the approved PRD to the build engine.
 
@@ -247,14 +329,17 @@ The build engine creates:
 - integrations
 - deployment files
 
-### Step 6: Hermes or OpenClaw prepares client-facing assets
+### Step 7: Hermes, ChatGPT, or OpenClaw prepares client-facing assets
 
-Hermes may create strategic client-facing assets directly.
+ChatGPT may create strategic client-facing assets.
+
+Hermes may create mission-based client-facing assets directly.
 
 OpenClaw may create operational delivery assets.
 
 Assets include:
 
+- Executive summary
 - Loom script
 - onboarding checklist
 - handoff email
@@ -262,7 +347,7 @@ Assets include:
 - support SOP
 - first-month optimization checklist
 
-### Step 7: RIOS records outcome
+### Step 8: RIOS records outcome
 
 RIOS updates:
 
@@ -279,6 +364,12 @@ Use these as standard mission categories.
 
 ```yaml
 mission_types:
+  strategy_planning:
+    owner: chatgpt
+    orchestrator: hermes
+    approval_required: false
+    output: chatgpt_strategy_brief.md
+
   signal_scan:
     owner: interchangeable
     default_worker: openclaw
@@ -288,6 +379,7 @@ mission_types:
 
   strategic_research:
     owner: hermes
+    strategic_reviewer: chatgpt
     approval_required: false
     output: hermes_strategy_brief.md
 
@@ -301,12 +393,14 @@ mission_types:
   market_research:
     owner: interchangeable
     default_worker: hermes
+    strategic_reviewer: chatgpt
     orchestrator: hermes
     approval_required: false
     output: market_research_brief.md
 
   prd_generation:
     owner: rios
+    strategic_input: chatgpt
     orchestrator: hermes
     approval_required: true
     output: PRD.md
@@ -320,17 +414,20 @@ mission_types:
   outreach_campaign:
     owner: interchangeable
     default_worker: openclaw
+    strategic_reviewer: chatgpt
     orchestrator: hermes
     approval_required: true
     output: approved_messages.csv
 
   client_delivery:
     owner: hermes
+    strategic_asset_creator: chatgpt
     approval_required: true
     output: delivery_package
 
   recurring_optimization:
     owner: hermes
+    strategic_reviewer: chatgpt
     approval_required: false
     output: weekly_report.md
 ```
@@ -348,7 +445,7 @@ Hermes must require approval before:
 - Moving a lead to closed-won
 - Issuing proposals or invoices
 
-Hermes or OpenClaw can run without approval for:
+Hermes, OpenClaw, or ChatGPT can run without approval for:
 
 - Research
 - Drafting
@@ -357,6 +454,7 @@ Hermes or OpenClaw can run without approval for:
 - Signal monitoring
 - Competitive scans
 - Internal reports
+- Strategic planning drafts
 
 ## Shared Workspace Structure
 
@@ -368,7 +466,9 @@ Each client or venture should have this structure:
     CLIENT.md
     OFFER.md
     GOALS.md
+    chatgpt-strategy-brief.md
   01-research/
+    chatgpt-strategy-brief.md
     hermes-strategy-brief.md
     openclaw-findings.md
     competitor-scan.md
@@ -382,6 +482,7 @@ Each client or venture should have this structure:
     deployment-notes.md
     qa-log.md
   04-delivery/
+    executive-summary.md
     loom-script.md
     handoff-email.md
     onboarding-checklist.md
@@ -395,14 +496,15 @@ Each client or venture should have this structure:
 
 ## Agent Handoff Contract
 
-Every handoff between RIOS, Hermes, OpenClaw, and Claude Code should use this format:
+Every handoff between ChatGPT, RIOS, Hermes, OpenClaw, and Claude Code should use this format:
 
 ```yaml
 handoff:
-  from: RIOS
-  to: Hermes
+  from: ChatGPT | RIOS | Hermes | OpenClaw | Claude Code | Codex
+  to: ChatGPT | RIOS | Hermes | OpenClaw | Claude Code | Codex
   mission_id: unique-id
   objective: what must be achieved
+  strategic_planner: chatgpt
   orchestrator: hermes
   research_mode: hermes_direct | openclaw_delegated | parallel | interchangeable
   context_files:
@@ -426,8 +528,8 @@ Hermes should assign work using this structure:
 worker_assignment:
   mission_id: unique-id
   assigned_by: hermes
-  worker: hermes_research | openclaw | claude_code | codex | python_api_worker | n8n
-  task_type: research | enrichment | drafting | build | qa | delivery | reporting
+  worker: chatgpt_strategy | hermes_research | openclaw | claude_code | codex | python_api_worker | n8n
+  task_type: strategy | research | enrichment | drafting | build | qa | delivery | reporting
   reason_for_assignment: why this worker is best suited
   input_context:
     - workspace/context-file.md
@@ -444,61 +546,27 @@ Do not overbuild the first version.
 
 Start with:
 
-1. RIOS folder/workspace standard
-2. Hermes mission file format
-3. Hermes direct research mode
-4. OpenClaw delegated research and vault-update tasks
-5. Claude Code PRD-to-build loop
-6. Supabase or Markdown record of mission status
-7. Human approval checkpoints
+1. ChatGPT strategy brief
+2. RIOS workspace structure
+3. Hermes mission file
+4. OpenClaw research output
+5. RIOS PRD output
+6. Claude Code build output
+7. Hermes delivery checklist
+8. Weekly optimization report
 
-## Version 1 Implementation Plan
+## Operating Rule
 
-### Phase 1: Documentation Integration
+ChatGPT thinks strategically.
 
-- Define Hermes mission schema
-- Define workspace folder structure
-- Define Hermes direct research mode
-- Define OpenClaw worker roles
-- Define approval rules
-- Define handoff contract
+RIOS stores and structures intelligence.
 
-### Phase 2: Manual Runtime
+Hermes orchestrates.
 
-- User creates mission manually
-- Hermes mission file is created as Markdown or JSON
-- Hermes decides research path
-- Hermes performs strategic research or delegates field research to OpenClaw
-- Claude Code executes build tasks
-- RIOS records mission progress
+OpenClaw executes field tasks.
 
-### Phase 3: Semi-Automated Runtime
+Claude Code and Codex build.
 
-- Add scheduled signal scans
-- Add automatic mission creation from approved signals
-- Add Supabase mission table
-- Add worker assignment table
-- Add notification queue
-- Add weekly reporting
+Supabase and the Markdown Vault remember.
 
-### Phase 4: Full Runtime
-
-- Hermes runs on VPS
-- OpenClaw runs as local or server worker
-- RIOS dashboard manages missions
-- Claude Code / Codex build tasks are queued
-- Supabase tracks state, memory, approvals, worker assignments, and outputs
-
-## Strategic Summary
-
-The Freedom Blueprint teaches how to build and sell with Claude Code.
-
-The RIOS version adds intelligence, orchestration, and repeatability.
-
-Hermes is the orchestrator. It can research directly, delegate research to OpenClaw, or run both in parallel.
-
-OpenClaw gives the system field execution and local/mobile operational reach.
-
-RIOS gives the system memory, business logic, and monetization architecture.
-
-This integration turns a solo builder workflow into an agentic venture operating system.
+Do not collapse these roles unless the task is small enough that separation creates unnecessary friction.
