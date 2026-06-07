@@ -78,6 +78,32 @@ The system follows this loop:
 10-TEMPLATES/                  Reusable prompts, checklists, agreements, scripts
 ```
 
+## Core RIOS Methodology
+
+The reusable graph-aware context intelligence methodology is documented here:
+
+```text
+02-RIOS-OPERATING-SYSTEM/GRAPH-KNOWLEDGE-CONTEXT-METHODOLOGY.md
+```
+
+This methodology defines the reusable pattern:
+
+```text
+Graph = What is connected?
+Knowledge Graph = What do those connections mean?
+Context Graph = What matters right now?
+RIOS = What should we do next?
+Hermes = Who should do it?
+OpenClaw = Which worker executes the task?
+GitHub = What evidence was produced?
+```
+
+Urban Mining Feedstock Intelligence is Example Use Case 1, with its detailed implementation maintained in:
+
+```text
+Ksdeng1559/breakthrough-urban-mining-feedstock-raise
+```
+
 ## Key Architecture Decisions
 
 ### ChatGPT as Strategic Planning Agent
@@ -164,12 +190,13 @@ Start here:
 
 1. Read `00-START-HERE/OPERATING-MANUAL.md`
 2. Read `09-HERMES-OPENCLAW/HERMES-RIOS-OPENCLAW-INTEGRATION.md`
-3. Read `10-SLACK-COMMAND-CENTER/README.md`
-4. Choose one offer from `05-OFFER-LIBRARY/OFFER-MENU.md`
-5. Use `03-PRD-FACTORY/PRD-INTERVIEW-PROMPT.md` to create a PRD
-6. Execute using `04-BUILD-LAB/CLAUDE-CODE-BUILD-LOOP.md`
-7. Sell using `06-OUTREACH-ENGINE/FIRST-25-OUTREACH-SOP.md`
-8. Track change requests and sign-offs through `10-SLACK-COMMAND-CENTER/`
+3. Read `02-RIOS-OPERATING-SYSTEM/GRAPH-KNOWLEDGE-CONTEXT-METHODOLOGY.md`
+4. Read `10-SLACK-COMMAND-CENTER/README.md`
+5. Choose one offer from `05-OFFER-LIBRARY/OFFER-MENU.md`
+6. Use `03-PRD-FACTORY/PRD-INTERVIEW-PROMPT.md` to create a PRD
+7. Execute using `04-BUILD-LAB/CLAUDE-CODE-BUILD-LOOP.md`
+8. Sell using `06-OUTREACH-ENGINE/FIRST-25-OUTREACH-SOP.md`
+9. Track change requests and sign-offs through `10-SLACK-COMMAND-CENTER/`
 
 ## Strategic Positioning
 
