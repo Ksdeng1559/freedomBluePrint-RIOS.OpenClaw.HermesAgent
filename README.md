@@ -1,5 +1,7 @@
 # Freedom Blueprint RIOS OpenClaw HermesAgent Operating System
 
+Copyright © 2026 KlickSmartAI.com / Klick2Client.com. All rights reserved.
+
 This repository converts Matt Ganzak's Freedom Blueprint into an operator-grade business operating system for building, selling, productizing, governing, and scaling AI-powered business systems.
 
 The original Freedom Blueprint teaches the path from Claude Code learning to first clients, then productized services, then SaaS. This repository adapts that path into a RIOS-style execution system using strategy, orchestration, delegated AI workers, human approvals, Slack governance, GitHub evidence trails, and repeatable venture studio workflows.
@@ -299,6 +301,84 @@ GitHub tracks:
 - Build history
 - Deployment references
 
+## Intellectual Property and Usage Framework
+
+Copyright © 2026 KlickSmartAI.com / Klick2Client.com. All rights reserved.
+
+This repository contains proprietary operating methods, strategic frameworks, implementation patterns, prompts, workflows, documentation structures, business models, and system architecture concepts developed for the KlickSmartAI / Klick2Client operating system.
+
+Unless a separate written license is provided, the contents of this repository are provided for internal planning, research, documentation, and authorized implementation use only.
+
+### Protected Materials
+
+Protected materials include, but are not limited to:
+
+- RIOS operating system architecture
+- Hermes orchestration framework
+- OpenClaw worker assignment model
+- AI workforce registry concepts
+- GTM Engineering workflows
+- Mission lifecycle methodology
+- PRD factory templates
+- Client delivery SOPs
+- Offer library structures
+- Signal-based outreach systems
+- Speech Intelligence Module design
+- Qdrant semantic memory architecture
+- Venture studio operating methods
+- Pricing, governance, approval, and delivery doctrines
+
+### Permitted Internal Use
+
+Authorized contributors may use this repository to:
+
+- Plan and document KlickSmartAI / Klick2Client systems
+- Build approved internal tools
+- Prepare approved client delivery assets
+- Create PRDs, implementation plans, and operating documents
+- Track architecture decisions and system evolution
+- Support approved AI venture studio, GTM engineering, and client delivery workflows
+
+### Restricted Use
+
+Without prior written permission from KlickSmartAI.com / Klick2Client.com, users may not:
+
+- Resell, sublicense, or redistribute this repository as a course, template, SaaS, agency system, or consulting framework
+- Copy the operating model into a competing commercial product or service
+- Remove copyright notices or ownership references
+- Represent the frameworks as their own original work
+- Package the repository into paid training, coaching, workshops, or implementation services
+- Use the materials to build a directly competing Relationship Intelligence Operating System, GTM Engineering OS, or AI Venture Studio OS
+
+### Third-Party Components
+
+This repository may reference third-party open-source tools, APIs, models, platforms, and frameworks. Those third-party components remain subject to their own licenses, terms of service, and usage restrictions.
+
+References to third-party systems such as OpenAI, Anthropic, Claude Code, Codex, Whisper, WhisperX, Qdrant, Supabase, LiveKit, Slack, GitHub, and related tools do not imply ownership of those technologies by KlickSmartAI.com / Klick2Client.com.
+
+### Contribution Rule
+
+Contributions, pull requests, documentation updates, templates, workflows, and implementation notes submitted to this repository may be incorporated into the broader KlickSmartAI / Klick2Client operating system unless otherwise agreed in writing before contribution.
+
+### Commercial Use
+
+Commercial use requires written approval from KlickSmartAI.com / Klick2Client.com.
+
+Commercial use includes, but is not limited to:
+
+- Client implementations
+- Paid consulting engagements
+- Training programs
+- Productized services
+- SaaS products
+- Venture studio deployments
+- White-label systems
+- Investor-facing commercial materials
+
+### Legal Note
+
+This section is an internal intellectual property and usage framework, not a substitute for formal legal advice. A formal LICENSE file and legal review should be added before broad public distribution, client onboarding, investor presentation, or commercial licensing.
+
 ## Change Request Doctrine
 
 Every feature request must connect to a goal.
@@ -383,6 +463,9 @@ The next layer of the system will add:
 - Voice Intelligence Worker
 - Whisper / WhisperX transcription pipeline
 - Future LiveKit real-time voice layer
+- Formal LICENSE file
+- Commercial use approval workflow
+- IP ownership and contribution policy
 
 These planned modules are tracked in:
 
