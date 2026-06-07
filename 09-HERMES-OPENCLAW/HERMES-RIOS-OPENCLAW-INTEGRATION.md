@@ -2,11 +2,11 @@
 
 ## Purpose
 
-This document defines how ChatGPT, Hermes Agent, OpenClaw, and RIOS work together inside the Freedom Blueprint operating system.
+This document defines how ChatGPT, Hermes Agent, OpenClaw, RIOS, and Qdrant work together inside the Freedom Blueprint operating system.
 
-The goal is not to make OpenClaw the whole system. OpenClaw is a delegated worker layer. Hermes is the orchestration and mission-control layer. RIOS is the business intelligence and operating system layer. ChatGPT is the strategic planning and executive reasoning layer.
+The goal is not to make OpenClaw the whole system. OpenClaw is a delegated worker layer. Hermes is the orchestration and mission-control layer. RIOS is the business intelligence and operating system layer. ChatGPT is the strategic planning and executive reasoning layer. Qdrant is the semantic recall layer used through MemoryService.
 
-Hermes Agent may also perform research, drafting, enrichment, and analysis directly. Research execution should be interchangeable between Hermes and OpenClaw depending on task type, tool access, cost, speed, and reliability.
+Hermes Agent may also perform research, drafting, enrichment, and analysis directly. Research execution should be interchangeable between Hermes and OpenClaw depending on task type, tool access, cost, speed, reliability, and memory context required.
 
 ## Core Positioning
 
@@ -17,7 +17,8 @@ Hermes Agent may also perform research, drafting, enrichment, and analysis direc
 | Hermes Agent | Orchestrator + Mission Control | Routes tasks, performs research when appropriate, coordinates agents, enforces workflows, manages approvals |
 | OpenClaw | Delegated Worker / Field Execution Agent | Performs assigned research, outreach prep, scraping, file work, reminders, vault updates, and operational tasks |
 | Claude Code / Codex | Build Engine | Creates, edits, tests, and deploys software |
-| Supabase / Markdown Vault | Memory Layer | Stores structured data and human-readable operating knowledge |
+| Supabase / Markdown Vault / Qdrant | Memory Layer | Stores structured truth, human-readable operating knowledge, and semantic recall |
+| MemoryService | Memory Abstraction | Prevents Hermes and workers from being tightly coupled to Qdrant directly |
 
 ## Integration Doctrine
 
@@ -29,9 +30,11 @@ OpenClaw is a worker.
 
 RIOS defines the operating model and stores intelligence.
 
+Qdrant provides semantic recall through MemoryService.
+
 ChatGPT helps determine what should be built, why it matters, how it should be positioned, and what the strategic plan should be.
 
-Hermes converts the strategy into missions, assigns workers, enforces approval gates, and tracks mission state.
+Hermes converts the strategy into missions, assigns workers, enforces approval gates, retrieves relevant memory when useful, and tracks mission state.
 
 OpenClaw performs delegated field tasks. It does not own the mission, choose the strategy, control the workflow, or become the system of record.
 
@@ -40,8 +43,39 @@ Claude Code and Codex build the products.
 The complete loop is:
 
 ```text
-Signal -> RIOS captures context -> ChatGPT creates strategy and prioritization -> Hermes creates mission -> Hermes decides whether to research directly or delegate to OpenClaw -> OpenClaw executes assigned worker tasks -> Research outputs return to Hermes -> Hermes writes mission state back to RIOS -> ChatGPT reviews strategic implications when needed -> Hermes routes build or outreach tasks -> Claude Code / Codex builds -> RIOS records -> Hermes follows up
+Signal -> RIOS captures context -> MemoryService retrieves similar prior knowledge when useful -> ChatGPT creates strategy and prioritization -> Hermes creates mission -> Hermes decides whether to research directly or delegate to OpenClaw -> OpenClaw executes assigned worker tasks -> Research outputs return to Hermes -> Hermes writes mission state back to RIOS -> approved reusable knowledge is indexed through MemoryService -> ChatGPT reviews strategic implications when needed -> Hermes routes build or outreach tasks -> Claude Code / Codex builds -> RIOS records -> Hermes follows up
 ```
+
+## Memory Doctrine
+
+Qdrant does not replace Supabase, Markdown Vault, GitHub, or Slack.
+
+```text
+Supabase = structured system of record
+Markdown Vault = human-readable operating knowledge
+Qdrant = semantic recall and similarity search
+GitHub = technical evidence trail
+Slack = approvals and governance
+MemoryService = access layer for semantic memory
+```
+
+Hermes should use MemoryService / Qdrant when it needs to:
+
+- retrieve similar prior projects
+- find related PRDs, offers, decisions, or workflows
+- compare a new opportunity against past patterns
+- detect duplicated work
+- enrich a mission with approved background context
+- support reusable agent memory across workspaces
+
+Hermes should not use Qdrant alone to:
+
+- approve spending
+- send outbound messages
+- make legal, financial, compliance, or investment claims
+- override human-approved decisions
+- change production systems
+- determine source-of-truth status
 
 ## OpenClaw Worker Doctrine
 
@@ -84,6 +118,7 @@ openclaw_worker_task:
   objective: clear task objective
   input_context:
     - workspace/context-file.md
+    - optional_memory_results_from_memory_service
   required_output:
     path: workspace/output-file.md
     format: markdown | json | csv | report
@@ -117,6 +152,7 @@ Use ChatGPT when the task requires executive judgment, strategic synthesis, busi
 - Mission state, approvals, retries, and notifications must be managed
 - A recurring workflow or scheduled process must run
 - A handoff must be tracked from research to PRD to build to delivery
+- Semantic memory should be retrieved to enrich mission context
 
 ### OpenClaw should lead only as a worker when:
 
@@ -138,7 +174,7 @@ ChatGPT may also perform strategic research synthesis after Hermes or OpenClaw p
 - The task requires synthesis across multiple workspaces
 - The research is strategic, financial, capital-formation, or business-model related
 - The output will decide whether to create a PRD, proposal, outreach campaign, or SaaS pattern
-- The task needs tight connection to RIOS state, client history, or approval logic
+- The task needs tight connection to RIOS state, client history, approval logic, or semantic memory
 
 ### OpenClaw should research when:
 
@@ -159,6 +195,8 @@ ChatGPT may also perform strategic research synthesis after Hermes or OpenClaw p
 ### Required standard
 
 Regardless of who performs the research, all research outputs must be stored in the same workspace format and returned to Hermes for mission-state tracking.
+
+Approved reusable outputs should be considered for MemoryService indexing.
 
 ## What Each Layer Owns
 
@@ -189,6 +227,7 @@ Regardless of who performs the research, all research outputs must be stored in 
 - Agent pack definitions
 - Human approval rules
 - Long-term knowledge base
+- Memory source-of-truth rules
 
 ### Hermes Owns
 
@@ -204,6 +243,7 @@ Regardless of who performs the research, all research outputs must be stored in 
 - Worker assignment
 - Escalation handling
 - Long-running orchestration
+- MemoryService retrieval decisions
 - Final synthesis across worker outputs
 
 ### OpenClaw Owns
@@ -231,6 +271,14 @@ Regardless of who performs the research, all research outputs must be stored in 
 - API integrations
 - Technical execution from PRDs
 
+### MemoryService / Qdrant Owns
+
+- Embedding approved text fragments
+- Semantic retrieval
+- Similarity search
+- Metadata pointers back to Supabase, GitHub, Slack, or Markdown Vault records
+- Retrieval filters by workspace, project, entity type, confidence, and source
+
 ## Recommended Architecture
 
 ```text
@@ -245,6 +293,7 @@ RIOS Dashboard / Workspace
    v
 Hermes Agent Orchestrator / Mission Control
    |
+   |-- MemoryService: Qdrant semantic recall and source pointers
    |-- Hermes Research Mode: strategic research, synthesis, routing decisions
    |-- OpenClaw Worker: signal research, field research, vault updates
    |-- OpenClaw Worker: outreach prep
@@ -253,7 +302,7 @@ Hermes Agent Orchestrator / Mission Control
    |-- n8n optional: external workflow handoff
    |
    v
-Supabase + Markdown Vault + GitHub
+Supabase + Markdown Vault + Qdrant + GitHub + Slack
 ```
 
 ## Hermes Orchestrator Decision Tree
@@ -262,6 +311,10 @@ Hermes chooses the worker before starting each mission task.
 
 ```text
 New Task
+  |
+  |-- Does the task require similar prior knowledge, reusable PRDs, decisions, or client patterns?
+  |      |-- Yes -> Query MemoryService / Qdrant first, then continue
+  |      |-- No -> Continue
   |
   |-- Does the task decide strategy, business model, positioning, pricing, or venture priority?
   |      |-- Yes -> ChatGPT Strategic Planning Agent
@@ -300,9 +353,21 @@ RIOS records:
 - Fit score
 - Recommended offer
 
-### Step 2: ChatGPT creates strategic plan
+### Step 2: MemoryService retrieves related context
 
-ChatGPT reviews the RIOS context and creates:
+Hermes queries semantic memory when useful:
+
+- similar client systems
+- related PRDs
+- prior pricing decisions
+- reusable outreach patterns
+- previous implementation risks
+
+Qdrant returns semantic matches with source pointers. Hermes checks the authoritative source before using the retrieved context.
+
+### Step 3: ChatGPT creates strategic plan
+
+ChatGPT reviews the RIOS context and approved retrieved memory, then creates:
 
 - Strategic opportunity brief
 - Recommended offer
@@ -318,7 +383,7 @@ Output:
 /workspaces/client-name/00-context/chatgpt-strategy-brief.md
 ```
 
-### Step 3: Hermes creates a mission
+### Step 4: Hermes creates a mission
 
 Hermes converts the approved strategy into a mission.
 
@@ -333,18 +398,20 @@ Example mission:
   "approval_required": true,
   "strategic_planner": "chatgpt",
   "orchestrator": "hermes",
+  "memory_mode": "query_memoryservice_when_reusable_context_is_needed",
   "research_mode": "interchangeable",
   "assigned_workers": ["chatgpt_strategy", "hermes_research", "openclaw_worker", "prd_factory", "claude_code_builder"]
 }
 ```
 
-### Step 4: Hermes selects the research path
+### Step 5: Hermes selects the research path
 
 Hermes decides whether to perform the research directly, delegate to OpenClaw, or run both in parallel.
 
 Recommended default:
 
 - ChatGPT creates strategic framing and decision logic
+- Hermes retrieves relevant prior memory through MemoryService
 - Hermes researches strategic context, business model, offer angle, and mission priority
 - OpenClaw researches website notes, competitors, market examples, local signals, and operational details as a delegated worker
 - Hermes merges research outputs into one synthesis
@@ -359,7 +426,7 @@ Outputs go into:
 /workspaces/client-name/01-research/research-synthesis.md
 ```
 
-### Step 5: RIOS PRD Factory creates build spec
+### Step 6: RIOS PRD Factory creates build spec
 
 RIOS converts the research synthesis into:
 
@@ -370,7 +437,7 @@ RIOS converts the research synthesis into:
 - deployment checklist
 - acceptance criteria
 
-### Step 6: Hermes routes build to Claude Code / Codex
+### Step 7: Hermes routes build to Claude Code / Codex
 
 Hermes sends the approved PRD to the build engine.
 
@@ -383,7 +450,7 @@ The build engine creates:
 - integrations
 - deployment files
 
-### Step 7: Hermes, ChatGPT, or OpenClaw prepares client-facing assets
+### Step 8: Hermes, ChatGPT, or OpenClaw prepares client-facing assets
 
 ChatGPT may create strategic client-facing assets.
 
@@ -397,241 +464,28 @@ Assets include:
 - Loom script
 - onboarding checklist
 - handoff email
-- FAQ
-- support SOP
-- first-month optimization checklist
 
-### Step 8: RIOS records outcome
+### Step 9: Approved reusable knowledge is indexed
 
-RIOS updates:
+After human approval, reusable knowledge may be indexed through MemoryService:
 
-- client status
-- project stage
-- build assets
-- testimonial request
-- retainer opportunity
-- SaaS pattern candidate
+- PRD summary
+- decision memo
+- offer pattern
+- client workflow pattern
+- risk note
+- implementation lesson
 
-## Hermes Mission Types
-
-Use these as standard mission categories.
-
-```yaml
-mission_types:
-  strategy_planning:
-    owner: chatgpt
-    orchestrator: hermes
-    approval_required: false
-    output: chatgpt_strategy_brief.md
-
-  signal_scan:
-    owner: openclaw_worker
-    orchestrator: hermes
-    approval_required: false
-    output: signal_report.md
-
-  strategic_research:
-    owner: hermes
-    strategic_reviewer: chatgpt
-    approval_required: false
-    output: hermes_strategy_brief.md
-
-  lead_enrichment:
-    owner: openclaw_worker
-    orchestrator: hermes
-    approval_required: false
-    output: enriched_leads.csv
-
-  market_research:
-    owner: interchangeable
-    default_worker: hermes
-    delegated_worker: openclaw_worker
-    strategic_reviewer: chatgpt
-    orchestrator: hermes
-    approval_required: false
-    output: market_research_brief.md
-
-  prd_generation:
-    owner: rios
-    strategic_input: chatgpt
-    orchestrator: hermes
-    approval_required: true
-    output: PRD.md
-
-  product_build:
-    owner: claude_code_or_codex
-    orchestrator: hermes
-    approval_required: true
-    output: deployed_application
-
-  outreach_campaign:
-    owner: openclaw_worker
-    strategic_reviewer: chatgpt
-    orchestrator: hermes
-    approval_required: true
-    output: approved_messages.csv
-
-  client_delivery:
-    owner: hermes
-    strategic_asset_creator: chatgpt
-    delegated_worker: openclaw_worker
-    approval_required: true
-    output: delivery_package
-
-  recurring_optimization:
-    owner: hermes
-    strategic_reviewer: chatgpt
-    delegated_worker: openclaw_worker
-    approval_required: false
-    output: weekly_report.md
-```
-
-## Approval Rules
-
-Hermes must require approval before:
-
-- Sending outbound messages
-- Spending money
-- Deploying production changes
-- Updating client-facing assets
-- Deleting files or records
-- Making legal, financial, compliance, or investment claims
-- Moving a lead to closed-won
-- Issuing proposals or invoices
-
-Hermes, OpenClaw, or ChatGPT can run without approval for:
-
-- Research
-- Drafting
-- Summarizing
-- File organization
-- Signal monitoring
-- Competitive scans
-- Internal reports
-- Strategic planning drafts
-
-## Shared Workspace Structure
-
-Each client or venture should have this structure:
+## Final Operating Rule
 
 ```text
-/workspaces/{client-or-venture}/
-  00-context/
-    CLIENT.md
-    OFFER.md
-    GOALS.md
-    chatgpt-strategy-brief.md
-  01-research/
-    chatgpt-strategy-brief.md
-    hermes-strategy-brief.md
-    openclaw-worker-findings.md
-    competitor-scan.md
-    signal-report.md
-    research-synthesis.md
-  02-prd/
-    PRD.md
-    BUILD-SEQUENCE.md
-  03-build/
-    repo-link.md
-    deployment-notes.md
-    qa-log.md
-  04-delivery/
-    executive-summary.md
-    loom-script.md
-    handoff-email.md
-    onboarding-checklist.md
-  05-optimization/
-    weekly-report.md
-    improvement-backlog.md
-  06-saas-pattern/
-    reusable-features.md
-    founding-partner-notes.md
-```
-
-## Agent Handoff Contract
-
-Every handoff between ChatGPT, RIOS, Hermes, OpenClaw, and Claude Code should use this format:
-
-```yaml
-handoff:
-  from: ChatGPT | RIOS | Hermes | OpenClaw | Claude Code | Codex
-  to: ChatGPT | RIOS | Hermes | OpenClaw | Claude Code | Codex
-  mission_id: unique-id
-  objective: what must be achieved
-  strategic_planner: chatgpt
-  orchestrator: hermes
-  research_mode: hermes_direct | openclaw_delegated | parallel | interchangeable
-  context_files:
-    - path/to/context.md
-  required_outputs:
-    - output-one.md
-    - output-two.csv
-  constraints:
-    - no outbound sending without approval
-    - no production deployment without approval
-  success_criteria:
-    - clear measurable result
-  next_review_checkpoint: human_review
-```
-
-## Worker Assignment Contract
-
-Hermes should assign work using this structure:
-
-```yaml
-worker_assignment:
-  mission_id: unique-id
-  assigned_by: hermes
-  worker: chatgpt_strategy | hermes_research | openclaw_worker | claude_code | codex | python_api_worker | n8n
-  task_type: strategy | research | enrichment | drafting | build | qa | delivery | reporting
-  reason_for_assignment: why this worker is best suited
-  input_context:
-    - workspace/context-file.md
-  required_output:
-    path: workspace/output-file.md
-    format: markdown | json | csv | code | report
-  approval_required: true | false
-  return_to: hermes
-```
-
-## Minimum Viable Integration
-
-Do not overbuild the first version.
-
-Start with:
-
-1. ChatGPT strategy brief
-2. RIOS workspace structure
-3. Hermes mission file
-4. OpenClaw worker research output
-5. RIOS PRD output
-6. Claude Code build output
-7. Hermes delivery checklist
-8. Weekly optimization report
-
-## Operating Rule
-
-ChatGPT thinks strategically.
-
-RIOS stores and structures intelligence.
-
-Hermes orchestrates.
-
-OpenClaw works.
-
+ChatGPT defines strategy.
+RIOS stores intelligence.
+Hermes orchestrates missions.
+MemoryService retrieves semantic context.
+Qdrant stores meaning.
+OpenClaw executes delegated work.
 Claude Code and Codex build.
-
-Supabase and the Markdown Vault remember.
-
-Do not collapse these roles unless the task is small enough that separation creates unnecessary friction.
-
-Final doctrine:
-
-```text
-ChatGPT = Strategy
-RIOS = Intelligence and memory
-Hermes = Orchestration and mission control
-OpenClaw = Worker execution
-Claude Code / Codex = Build execution
-Supabase / Markdown Vault = Memory and operating knowledge
+Slack approves.
+GitHub records evidence.
 ```
