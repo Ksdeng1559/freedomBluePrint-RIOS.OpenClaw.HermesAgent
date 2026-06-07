@@ -75,8 +75,41 @@ The system follows this loop:
 09-HERMES-OPENCLAW/            Hermes, OpenClaw, ChatGPT, RIOS integration model
 10-SLACK-COMMAND-CENTER/       Change requests, sign-offs, approvals, pricing rules
 11-IMPLEMENTATION-ROADMAP/     Planned modules for governance, ROI, venture scoring
-10-TEMPLATES/                  Reusable prompts, checklists, agreements, scripts
+12-TEMPLATES/                  Reusable prompts, checklists, agreements, scripts
 ```
+
+## Execution Layer Documents
+
+Start with these new execution documents:
+
+```text
+00-START-HERE/QUICKSTART-7-DAY-ACTION-PLAN.md
+02-RIOS-OPERATING-SYSTEM/RIOS-SYSTEM-BOUNDARIES.md
+09-HERMES-OPENCLAW/WORKER-ASSIGNMENT-MATRIX.md
+11-IMPLEMENTATION-ROADMAP/MVP-BUILD-SEQUENCE.md
+12-TEMPLATES/MISSION-BRIEF-TEMPLATE.md
+```
+
+These files convert the architecture from concept into a repeatable operating workflow.
+
+## MVP Implementation Priority
+
+The first implementation of this system should not attempt to build the entire operating system at once.
+
+The MVP should focus on one repeatable revenue workflow:
+
+1. Capture a business opportunity
+2. Convert it into a goal
+3. Generate a mission brief
+4. Assign worker tasks
+5. Produce research evidence
+6. Convert findings into a PRD
+7. Build or package a client-facing asset
+8. Route approval through Slack
+9. Track implementation through GitHub
+10. Store reusable intelligence in Supabase, Markdown, and Qdrant
+
+The first recommended use case is Urban Mining Feedstock Intelligence because it combines signal detection, relationship intelligence, supplier discovery, capital formation, investor targeting, and repeatable research-to-action workflows.
 
 ## Core RIOS Methodology
 
@@ -201,16 +234,20 @@ Hermes must require human approval before:
 
 Start here:
 
-1. Read `00-START-HERE/OPERATING-MANUAL.md`
-2. Read `09-HERMES-OPENCLAW/HERMES-RIOS-OPENCLAW-INTEGRATION.md`
-3. Read `02-RIOS-OPERATING-SYSTEM/GRAPH-KNOWLEDGE-CONTEXT-METHODOLOGY.md`
-4. Read `02-RIOS-OPERATING-SYSTEM/QDRANT-SEMANTIC-MEMORY-LAYER.md`
-5. Read `10-SLACK-COMMAND-CENTER/README.md`
-6. Choose one offer from `05-OFFER-LIBRARY/OFFER-MENU.md`
-7. Use `03-PRD-FACTORY/PRD-INTERVIEW-PROMPT.md` to create a PRD
-8. Execute using `04-BUILD-LAB/CLAUDE-CODE-BUILD-LOOP.md`
-9. Sell using `06-OUTREACH-ENGINE/FIRST-25-OUTREACH-SOP.md`
-10. Track change requests and sign-offs through `10-SLACK-COMMAND-CENTER/`
+1. Read `00-START-HERE/QUICKSTART-7-DAY-ACTION-PLAN.md`
+2. Read `00-START-HERE/OPERATING-MANUAL.md`
+3. Read `02-RIOS-OPERATING-SYSTEM/RIOS-SYSTEM-BOUNDARIES.md`
+4. Read `09-HERMES-OPENCLAW/HERMES-RIOS-OPENCLAW-INTEGRATION.md`
+5. Read `09-HERMES-OPENCLAW/WORKER-ASSIGNMENT-MATRIX.md`
+6. Read `02-RIOS-OPERATING-SYSTEM/GRAPH-KNOWLEDGE-CONTEXT-METHODOLOGY.md`
+7. Read `02-RIOS-OPERATING-SYSTEM/QDRANT-SEMANTIC-MEMORY-LAYER.md`
+8. Read `10-SLACK-COMMAND-CENTER/README.md`
+9. Choose one offer from `05-OFFER-LIBRARY/OFFER-MENU.md`
+10. Use `12-TEMPLATES/MISSION-BRIEF-TEMPLATE.md` to create a mission brief
+11. Use `03-PRD-FACTORY/PRD-INTERVIEW-PROMPT.md` to create a PRD
+12. Execute using `04-BUILD-LAB/CLAUDE-CODE-BUILD-LOOP.md`
+13. Sell using `06-OUTREACH-ENGINE/FIRST-25-OUTREACH-SOP.md`
+14. Track change requests and sign-offs through `10-SLACK-COMMAND-CENTER/`
 
 ## Strategic Positioning
 
