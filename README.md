@@ -14,7 +14,7 @@ OpenClaw = Delegated worker execution
 Claude Code / Codex = Build execution
 Slack = Human governance + approvals
 GitHub = Code, PRs, issues, and evidence trail
-Supabase / Markdown Vault = Structured memory + human-readable operating knowledge
+Supabase / Markdown Vault / Qdrant = Structured truth + human-readable operating knowledge + semantic recall
 ```
 
 ## What This System Is For
@@ -86,6 +86,12 @@ The reusable graph-aware context intelligence methodology is documented here:
 02-RIOS-OPERATING-SYSTEM/GRAPH-KNOWLEDGE-CONTEXT-METHODOLOGY.md
 ```
 
+The semantic memory layer is documented here:
+
+```text
+02-RIOS-OPERATING-SYSTEM/QDRANT-SEMANTIC-MEMORY-LAYER.md
+```
+
 This methodology defines the reusable pattern:
 
 ```text
@@ -96,6 +102,7 @@ RIOS = What should we do next?
 Hermes = Who should do it?
 OpenClaw = Which worker executes the task?
 GitHub = What evidence was produced?
+Qdrant = What prior knowledge is semantically similar?
 ```
 
 Urban Mining Feedstock Intelligence is Example Use Case 1, with its detailed implementation maintained in:
@@ -121,6 +128,12 @@ OpenClaw is not the central brain. OpenClaw is a delegated worker for field exec
 ### RIOS as Intelligence OS
 
 RIOS stores business context, goals, opportunities, client state, PRDs, signal scoring rules, decisions, feature requests, and long-term system knowledge.
+
+### Qdrant as Semantic Memory Layer
+
+Qdrant stores embeddings and metadata pointers for semantic recall across conversations, documents, decisions, opportunities, PRDs, client patterns, and research fragments.
+
+Qdrant does not replace Supabase or the Markdown Vault. Supabase remains the structured system of record. The Markdown Vault remains the human-readable operating knowledge layer. Qdrant helps Hermes retrieve meaning and similarity across workspaces.
 
 ### Slack as Governance Layer
 
@@ -191,12 +204,13 @@ Start here:
 1. Read `00-START-HERE/OPERATING-MANUAL.md`
 2. Read `09-HERMES-OPENCLAW/HERMES-RIOS-OPENCLAW-INTEGRATION.md`
 3. Read `02-RIOS-OPERATING-SYSTEM/GRAPH-KNOWLEDGE-CONTEXT-METHODOLOGY.md`
-4. Read `10-SLACK-COMMAND-CENTER/README.md`
-5. Choose one offer from `05-OFFER-LIBRARY/OFFER-MENU.md`
-6. Use `03-PRD-FACTORY/PRD-INTERVIEW-PROMPT.md` to create a PRD
-7. Execute using `04-BUILD-LAB/CLAUDE-CODE-BUILD-LOOP.md`
-8. Sell using `06-OUTREACH-ENGINE/FIRST-25-OUTREACH-SOP.md`
-9. Track change requests and sign-offs through `10-SLACK-COMMAND-CENTER/`
+4. Read `02-RIOS-OPERATING-SYSTEM/QDRANT-SEMANTIC-MEMORY-LAYER.md`
+5. Read `10-SLACK-COMMAND-CENTER/README.md`
+6. Choose one offer from `05-OFFER-LIBRARY/OFFER-MENU.md`
+7. Use `03-PRD-FACTORY/PRD-INTERVIEW-PROMPT.md` to create a PRD
+8. Execute using `04-BUILD-LAB/CLAUDE-CODE-BUILD-LOOP.md`
+9. Sell using `06-OUTREACH-ENGINE/FIRST-25-OUTREACH-SOP.md`
+10. Track change requests and sign-offs through `10-SLACK-COMMAND-CENTER/`
 
 ## Strategic Positioning
 
@@ -220,6 +234,8 @@ The next layer of the system will add:
 - Investor Relations Module
 - Knowledge Capture SOP
 - Meeting Intelligence Workflow
+- Qdrant Semantic Memory Service
+- MemoryService abstraction
 
 These planned modules are tracked in:
 
