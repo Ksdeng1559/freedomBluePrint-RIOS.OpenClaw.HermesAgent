@@ -55,6 +55,7 @@ Signal -> Discovery -> PRD -> Build -> Deploy -> Demo -> Close -> Deliver -> Ret
 - Save prompts
 - Add reusable components
 - Document lessons learned
+- Index approved reusable knowledge into Qdrant through MemoryService when it is valuable for future recall
 
 ### Sunday — Review
 
@@ -82,6 +83,7 @@ Signal -> Discovery -> PRD -> Build -> Deploy -> Demo -> Close -> Deliver -> Ret
 - VA or assistant support for outreach
 - 5-10 active retainers
 - Weekly inbound or referral flow
+- Reusable semantic memory available across approved workspaces
 
 ### Stage 3 Metrics
 
@@ -99,6 +101,7 @@ Signal -> Discovery -> PRD -> Build -> Deploy -> Demo -> Close -> Deliver -> Ret
 4. If three clients ask for the same thing, productize it.
 5. If a productized service scales with software, convert it to SaaS.
 6. If there is legal, financial, compliance, or reputational risk, keep a human in the loop.
+7. If knowledge will be useful across future projects, store the authoritative record first, then index it into Qdrant for semantic recall.
 
 ## Default Stack
 
@@ -109,8 +112,24 @@ Signal -> Discovery -> PRD -> Build -> Deploy -> Demo -> Close -> Deliver -> Ret
 - Deployment: Vercel / Railway / Cloudflare
 - CRM: GoHighLevel when client acquisition or follow-up is involved
 - Orchestration: Hermes Agent
-- Memory: Markdown vault + Supabase
+- Memory: Markdown Vault + Supabase + Qdrant through MemoryService
+- Source of truth: Slack approvals, GitHub evidence, Supabase records, Markdown operating documents
+- Semantic recall: Qdrant for similar projects, decisions, PRDs, offers, research, and client patterns
 - Outreach: Signal-based research + personalized Loom/email
+
+## Memory Rule
+
+```text
+Supabase stores structured truth.
+Markdown stores readable operating knowledge.
+Qdrant stores semantic recall.
+GitHub stores technical evidence.
+Slack stores approvals.
+Hermes decides what context matters.
+Humans approve high-impact action.
+```
+
+Qdrant is not the system of record. It is used only after source material has an approved record, file, or evidence trail.
 
 ## First Build Recommendation
 
