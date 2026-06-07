@@ -14,10 +14,10 @@ OpenClaw = Worker execution
 Claude Code / Codex = Build execution
 Slack = Human governance and approvals
 GitHub = Code, issues, pull requests, evidence
-Supabase / Markdown Vault = Structured and human-readable memory
+Supabase / Markdown Vault / Qdrant = Structured truth + human-readable memory + semantic recall
 ```
 
-The next implementation phase adds governance, venture prioritization, ROI discipline, capital formation workflows, and workforce management.
+The next implementation phase adds governance, venture prioritization, ROI discipline, capital formation workflows, workforce management, and reusable semantic memory.
 
 ---
 
@@ -45,6 +45,7 @@ Decision examples:
 - USD as baseline currency
 - Feature creep requires quote request
 - Founding partner model for SaaS builds
+- Qdrant as semantic memory layer behind MemoryService
 
 Decision record format:
 
@@ -77,6 +78,7 @@ Planned folder:
   ADR-003-SLACK-AS-GOVERNANCE.md
   ADR-004-CHATGPT-AS-STRATEGIC-PLANNER.md
   ADR-005-RIOS-AS-INTELLIGENCE-OS.md
+  ADR-006-QDRANT-AS-SEMANTIC-MEMORY.md
 ```
 
 Purpose:
@@ -106,7 +108,7 @@ What improves? What tradeoffs exist?
 
 ---
 
-# Phase 2 — ROI and Feature Discipline
+# Phase 2 — ROI, Feature Discipline, and Memory Foundation
 
 ## 3. ROI Approval Engine
 
@@ -166,11 +168,59 @@ New Feature Request
 → Build Queue
 ```
 
+## 5. Qdrant Semantic Memory Service
+
+Planned folder:
+
+```text
+18-MEMORY-SERVICE/
+  MEMORYSERVICE-SPEC.md
+  QDRANT-ADAPTER-SPEC.md
+  MEMORY-INDEXING-SOP.md
+  MEMORY-RETRIEVAL-RULES.md
+```
+
+Purpose:
+
+Add reusable semantic recall so Hermes can retrieve similar prior work, decisions, PRDs, offers, research fragments, opportunity patterns, and client context across approved workspaces.
+
+Memory service rule:
+
+```text
+Supabase remains the structured system of record.
+Markdown Vault remains the human-readable operating knowledge layer.
+Qdrant stores embeddings and metadata pointers for semantic recall.
+MemoryService prevents Hermes and workers from being tightly coupled to Qdrant directly.
+```
+
+Initial MemoryService interface:
+
+```yaml
+memory_service:
+  write_memory:
+    input: source_text, source_record_id, workspace_id, entity_type, tags
+    output: qdrant_point_id
+  search_memory:
+    input: query, workspace_id, filters, top_k
+    output: ranked_memory_results
+  link_to_source:
+    input: qdrant_point_id, source_system, source_path_or_id
+    output: source_pointer
+  retrieve_similar_projects:
+    input: project_summary, filters
+    output: similar_projects
+  retrieve_related_decisions:
+    input: decision_context, filters
+    output: related_decisions
+```
+
+Do not index unapproved, sensitive, legal, financial, or compliance-heavy material unless the source-of-truth and access-control rules are clear.
+
 ---
 
 # Phase 3 — AI Workforce Management
 
-## 5. AI Workforce Registry
+## 6. AI Workforce Registry
 
 Planned folder:
 
@@ -222,12 +272,13 @@ Initial workers:
 - Capital Intelligence Worker
 - QA Review Worker
 - Slack Governance Worker
+- Memory Indexing Worker
 
 ---
 
 # Phase 4 — Venture Studio Operating Layer
 
-## 6. Venture Scorecard
+## 7. Venture Scorecard
 
 Planned folder:
 
@@ -272,7 +323,7 @@ Initial ventures to score:
 - GMBOS Trading Education / SaaS
 - Freedom Blueprint RIOS Operating System
 
-## 7. Opportunity Pipeline
+## 8. Opportunity Pipeline
 
 Planned file:
 
@@ -302,7 +353,7 @@ Hermes should update pipeline stage when new evidence is captured.
 
 # Phase 5 — Capital Formation Layer
 
-## 8. Investor Relations Module
+## 9. Investor Relations Module
 
 Planned folder:
 
@@ -356,7 +407,7 @@ investor:
 
 # Phase 6 — Knowledge Capture and Meeting Intelligence
 
-## 9. Knowledge Capture SOP
+## 10. Knowledge Capture SOP
 
 Planned folder:
 
@@ -384,6 +435,8 @@ Meeting / Conversation
 → Hermes Missions
 → RIOS Workspace Updates
 → Decision Log Updates
+→ MemoryService Indexing Decision
+→ Qdrant Semantic Recall When Approved
 ```
 
 Output files:
@@ -392,6 +445,7 @@ Output files:
 /workspaces/{client-or-venture}/00-context/meeting-summary.md
 /workspaces/{client-or-venture}/05-optimization/action-items.md
 11-GOVERNANCE/DECISION-LOG.md
+18-MEMORY-SERVICE/indexing-queue.md
 ```
 
 ---
@@ -404,23 +458,25 @@ Output files:
 2. Architecture Decision Records
 3. ROI Approval Engine
 4. AI Workforce Registry
+5. Qdrant MemoryService foundation
 
-These create governance, system memory, prioritization, and worker discipline.
+These create governance, system memory, prioritization, worker discipline, and future-proof semantic recall.
 
 ## Priority 2 — Venture Studio Expansion
 
-5. Venture Scorecard
-6. Opportunity Pipeline
-7. Capital Formation Module
+6. Venture Scorecard
+7. Opportunity Pipeline
+8. Capital Formation Module
 
 These support RIOS as a venture studio system.
 
 ## Priority 3 — Operating Memory
 
-8. Knowledge Capture SOP
-9. Meeting Intelligence Workflow
+9. Knowledge Capture SOP
+10. Meeting Intelligence Workflow
+11. Memory indexing workflow
 
-These ensure no strategic conversation is lost.
+These ensure no strategic conversation is lost and that reusable patterns can be retrieved later.
 
 ---
 
@@ -447,6 +503,7 @@ roadmap_status:
   architecture_decision_records: proposed
   roi_approval_engine: proposed
   ai_workforce_registry: proposed
+  qdrant_memory_service: proposed
   venture_scorecard: proposed
   opportunity_pipeline: proposed
   investor_relations_module: proposed
@@ -456,5 +513,5 @@ roadmap_status:
 Final rule:
 
 ```text
-Capture everything. Build only what is approved. Price every out-of-scope request. Score every feature. Log every major decision.
+Capture everything. Build only what is approved. Price every out-of-scope request. Score every feature. Log every major decision. Index only approved reusable knowledge.
 ```
