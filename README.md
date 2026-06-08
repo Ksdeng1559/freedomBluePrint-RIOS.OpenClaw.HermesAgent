@@ -6,6 +6,67 @@ This repository converts Matt Ganzak's Freedom Blueprint into an operator-grade 
 
 The original Freedom Blueprint teaches the path from Claude Code learning to first clients, then productized services, then SaaS. This repository adapts that path into a RIOS-style execution system using strategy, orchestration, delegated AI workers, human approvals, Slack governance, GitHub evidence trails, and repeatable venture studio workflows.
 
+## Core Message
+
+The bottleneck is no longer building software.
+
+The bottleneck is deciding what should be built.
+
+RIOS exists to help the operator find valuable patterns, validate demand, build only what produces measurable outcomes, and convert repeated outcomes into revenue infrastructure.
+
+```text
+Find valuable problems.
+Validate demand.
+Build only what creates measurable outcomes.
+Turn repeatable outcomes into systems.
+```
+
+## Pattern Recognition Doctrine
+
+RIOS is a pattern engine, not a note warehouse.
+
+It looks for patterns that repeat and produce outcomes:
+
+- Revenue patterns
+- Customer pain patterns
+- Relationship patterns
+- Signal patterns
+- Outcome patterns
+- Operator decision patterns
+
+The canonical pattern recognition doctrine is maintained here:
+
+```text
+02-RIOS-OPERATING-SYSTEM/PATTERN-RECOGNITION-DOCTRINE.md
+```
+
+The master pattern loop:
+
+```text
+Signal
+   ↓
+Context
+   ↓
+Pattern
+   ↓
+Decision
+   ↓
+Action
+   ↓
+Outcome
+   ↓
+Capture
+   ↓
+Reusable System
+```
+
+Strategic rule:
+
+```text
+The software is only the container.
+The pattern is the asset.
+```
+
 ## 2026 SaaS Playbook Doctrine
 
 The ScaleUpMedia 2026 SaaS Playbook reinforces the core operating principle of this repository: AI speed is not enough. The winning operator does not simply build faster. The winning operator knows what to build, what to avoid, how to validate demand, how to control execution quality, and how to connect the build to distribution before writing code.
@@ -256,6 +317,7 @@ Start with these execution documents:
 00-START-HERE/QUICKSTART-7-DAY-ACTION-PLAN.md
 00-START-HERE/MISSION-LIFECYCLE-SOP.md
 02-RIOS-OPERATING-SYSTEM/RIOS-SYSTEM-BOUNDARIES.md
+02-RIOS-OPERATING-SYSTEM/PATTERN-RECOGNITION-DOCTRINE.md
 09-HERMES-OPENCLAW/WORKER-ASSIGNMENT-MATRIX.md
 11-IMPLEMENTATION-ROADMAP/MVP-BUILD-SEQUENCE.md
 12-TEMPLATES/MISSION-BRIEF-TEMPLATE.md
@@ -587,17 +649,18 @@ Start here:
 2. Read `00-START-HERE/MISSION-LIFECYCLE-SOP.md`
 3. Read `00-START-HERE/OPERATING-MANUAL.md`
 4. Read `02-RIOS-OPERATING-SYSTEM/RIOS-SYSTEM-BOUNDARIES.md`
-5. Read `09-HERMES-OPENCLAW/HERMES-RIOS-OPENCLAW-INTEGRATION.md`
-6. Read `09-HERMES-OPENCLAW/WORKER-ASSIGNMENT-MATRIX.md`
-7. Read `02-RIOS-OPERATING-SYSTEM/GRAPH-KNOWLEDGE-CONTEXT-METHODOLOGY.md`
-8. Read `02-RIOS-OPERATING-SYSTEM/QDRANT-SEMANTIC-MEMORY-LAYER.md`
-9. Read `10-SLACK-COMMAND-CENTER/README.md`
-10. Choose one offer from `05-OFFER-LIBRARY/OFFER-MENU.md`
-11. Use `12-TEMPLATES/MISSION-BRIEF-TEMPLATE.md` to create a mission brief
-12. Use `03-PRD-FACTORY/PRD-INTERVIEW-PROMPT.md` to create a PRD
-13. Execute using `04-BUILD-LAB/CLAUDE-CODE-BUILD-LOOP.md`
-14. Sell using `06-OUTREACH-ENGINE/FIRST-25-OUTREACH-SOP.md`
-15. Track change requests and sign-offs through `10-SLACK-COMMAND-CENTER/`
+5. Read `02-RIOS-OPERATING-SYSTEM/PATTERN-RECOGNITION-DOCTRINE.md`
+6. Read `09-HERMES-OPENCLAW/HERMES-RIOS-OPENCLAW-INTEGRATION.md`
+7. Read `09-HERMES-OPENCLAW/WORKER-ASSIGNMENT-MATRIX.md`
+8. Read `02-RIOS-OPERATING-SYSTEM/GRAPH-KNOWLEDGE-CONTEXT-METHODOLOGY.md`
+9. Read `02-RIOS-OPERATING-SYSTEM/QDRANT-SEMANTIC-MEMORY-LAYER.md`
+10. Read `10-SLACK-COMMAND-CENTER/README.md`
+11. Choose one offer from `05-OFFER-LIBRARY/OFFER-MENU.md`
+12. Use `12-TEMPLATES/MISSION-BRIEF-TEMPLATE.md` to create a mission brief
+13. Use `03-PRD-FACTORY/PRD-INTERVIEW-PROMPT.md` to create a PRD
+14. Execute using `04-BUILD-LAB/CLAUDE-CODE-BUILD-LOOP.md`
+15. Sell using `06-OUTREACH-ENGINE/FIRST-25-OUTREACH-SOP.md`
+16. Track change requests and sign-offs through `10-SLACK-COMMAND-CENTER/`
 
 ## Strategic Positioning
 
@@ -632,6 +695,11 @@ The next layer of the system will add:
 - Outcome-Per-Dollar Pricing Engine
 - Operator Decision-Maker Checklist
 - AI Technical Debt Review Gate
+- Pattern Recognition Engine
+- Pattern Capture Template
+- Pattern Scoring Service
+- Revenue Pattern Library
+- Relationship Intelligence Pattern Map
 - Formal LICENSE file
 - Commercial use approval workflow
 - IP ownership and contribution policy
