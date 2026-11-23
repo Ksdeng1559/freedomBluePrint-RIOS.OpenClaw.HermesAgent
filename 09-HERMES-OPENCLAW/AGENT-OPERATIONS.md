@@ -4,9 +4,13 @@
 
 This folder defines how the Freedom Blueprint operating system becomes proactive rather than reactive.
 
-Hermes is the mission control agent.
+Hermes is the persistent AI workforce, including discovery, enrichment coordination, qualification, outbound preparation, CRM feedback analysis, and continuous evaluation. Mission Control is its supervision and task-routing capability, not its only function. See [CRM Learning Loop v2](CRM-LEARNING-LOOP-V2.md) and [Agency Agents workforce mapping](WORKFORCE-AGENCY-AGENTS-REFactor.md).
 
 OpenClaw-style workflows provide memory, routing, outreach, and task automation patterns.
+
+## Session Learning Standard
+
+At the start of each session, load the most recent validated tenant-specific CRM learning snapshot and freeze its version for the run. At session close, reconcile CRM events, record outcome quality and propose next-session prioritization. Suppression and verified deal-status refreshes may update operational state immediately; scoring weights, ICP and external outreach require evaluation and approval. See [acceptance criteria](SESSION-FEEDBACK-ACCEPTANCE.md).
 
 ## Agent Operating Principles
 
