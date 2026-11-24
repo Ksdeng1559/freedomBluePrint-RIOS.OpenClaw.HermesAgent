@@ -1,5 +1,9 @@
 # Worker Assignment Matrix
 
+## Workforce clarification
+
+Hermes is the persistent executing workforce as well as its own mission-control capability. OpenClaw is an optional worker or integration layer, not a mandatory owner of research and enrichment. Client CRM connections are handled by scoped n8n/API adapters; Python owns deterministic processing. The authoritative session-feedback policy is [CRM Learning Loop v2](CRM-LEARNING-LOOP-V2.md), with role definitions in [Agency Agents refactor](WORKFORCE-AGENCY-AGENTS-REFactor.md). This supersedes conflicting owner assignments below for new lead-generation workflows.
+
 ## Purpose
 
 This document defines which system layer should own each type of task in the Freedom Blueprint RIOS OpenClaw HermesAgent Operating System.
