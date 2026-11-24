@@ -37,3 +37,11 @@
 - [ ] Operator reviews outcome diagnostics before multi-tenant scale.
 
 **This checklist is unexecuted until supported with test-run evidence.**
+
+## ICM interpretation validation
+- [ ] All seven ICM stages produced explicit outputs with timestamps, source provenance and stage-gate evidence.
+- [ ] No prospect scored before objective/constraints, business context, interpreted signals and relationships were assembled.
+- [ ] Every Why-Now claim differentiates confirmed evidence from hypotheses and records time-window freshness.
+- [ ] Outreach is the final action of the interpreted context pipeline, not the first decision.
+- [ ] Next session incorporates a verified CRM interpretation delta, and can reproduce prior baseline decisions.
+- [ ] Factory reference rules remain isolated from tenant-specific Product artifacts.
