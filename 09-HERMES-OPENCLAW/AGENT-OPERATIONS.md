@@ -108,3 +108,7 @@ Agents must not automatically:
 - Weekly project status reporter
 - Retainer renewal reminder
 - SaaS feature request classifier
+
+## ICM workflow routing
+
+All new lead-generation runs MUST follow [ICM Workforce Stage Contracts](ICM-WORKFORCE/CONTEXT.md): Intake → Research → Business Context → Signals/Relationships → Relevance/Decision → Approved Execution → CRM Outcomes/Interpretive Learning. Data may not be scored or turned into outreach until the business context and signal interpretation gates pass. `CLAUDE.md` routes stage-specific context; Factory policies are separate from per-session Product artifacts. This requirement supersedes the abbreviated sequence in legacy task instructions.
