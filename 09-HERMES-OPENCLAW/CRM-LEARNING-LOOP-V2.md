@@ -162,3 +162,7 @@ NEXT SESSION
 ## 8. Definition of done
 
 Production integration requires verified CRM adapter, replay-safe webhooks, live tenant RLS negative tests, sample-labeled outcome mapping tests, shadow ranking against a baseline, approved outreach gate, analytics reconciliation, and documented scoring promotion/rollback evidence. This repository change alone does **not** deploy or activate anything.
+
+## 0. Required ICM interpretation layer (supersedes shortcuts)
+
+This CRM feedback SOP MUST execute via [ICM Workforce Root Contract](ICM-WORKFORCE/CONTEXT.md). ICM is the method by which Hermes interprets evidence, not an optional lead-scoring add-on. The immutable sequence is **Raw Data → Business Context → Structured Signal → Interpretation → Score → Classification → Recommended Action**, followed by human-approved outreach, verified CRM outcomes and iterative context learning. Work is passed through stage-scoped `CONTEXT.md` artifacts and review gates. Session feedback updates the next session's interpreted context and may recommend changes but may not silently edit production policy or agent roles. All workflow steps below must obey the corresponding ICM stage contract.
